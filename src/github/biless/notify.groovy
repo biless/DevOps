@@ -16,15 +16,15 @@ def SendWxWork(Status,CatchInfo=' ') {
 }
 
 // 发送审批信息
-def SendApprovalWxWork(appToken,approvalUser,jobName,info,approvalCode) {
+def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode) {
   echo "!--------- Send WxWork --------------"
 	sh """
-		curl --location --request POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$appToken' \
+		curl --location --request POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$AppToken' \
 		--header 'Content-Type: application/json' \
 		--data '{
             "msgtype": "markdown",
             "markdown": {
-              "content": "### 【${approvalUser}】发布上线申请,请审批\n> 应用名称: ${jobName}\n> 构建信息: ${info}\n> 随机验证码: ${approvalCode}\n <@all>",
+              "content": "### 【${ApprovalUser}】发布上线申请,请审批\n> 应用名称: ${JobName}\n> 构建信息: ${Info}\n> 随机验证码: ${ApprovalCode}\n <@all>",
               "mentioned_list": [ "@all" ]
             }
         }'
