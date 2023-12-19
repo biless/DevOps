@@ -16,7 +16,7 @@ package github.biless
 // }
 
 // 发送审批信息
-def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode) {
+def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode = '') {
   echo "!--------- Send WxWork --------------"
 	sh """
 		curl --location --request POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$AppToken' \
@@ -28,7 +28,7 @@ def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode) {
             }
         }'
 	"""
-  }
+}
 
 // 发送上线信息
 // def SendStatusWxWork(appToken,approvalUser,status,jobName) {
