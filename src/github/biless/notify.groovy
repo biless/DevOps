@@ -14,11 +14,15 @@ package github.biless
 //         }'
 // 	"""
 // }
+def MySh(cmd,returnStatus) {
+    return sh (script: "#!/bin/sh -e\n" + cmd, returnStatus: returnStatus)
+  }
+
 
 // 发送审批信息
 def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode = '') {
   echo "!--------- Send WxWork --------------"
-	sh """
+	MySh("""
 		curl --location --request POST 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=$AppToken' \
 		--header 'Content-Type: application/json' \
 		--data '{
@@ -27,7 +31,7 @@ def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode = '') {
               "content": "### 【${ApprovalUser}】发布上线申请,请审批\n> 应用名称: ${JobName}\n> 构建信息: ${Info}\n> 随机验证码: ${ApprovalCode}\n <@all>"
             }
         }'
-	"""
+	""",true)
 }
 
 // 发送上线信息
