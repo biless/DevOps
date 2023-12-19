@@ -35,9 +35,9 @@ def SendApprovalWxWork(appToken,approvalUser,jobName,info,approvalCode) {
 def SendStatusWxWork(appToken,approvalUser,status,jobName) {
   statusDes = "<font color=\"info\">已完成</font>"
   status = status ?: "failure"
-  if (status = "success") {
+  if (status == "success") {
     
-  } else if (status = "failure") {
+  } else if (status == "failure") {
     statusDes = "<font color=\"warning\">失败</font>"
   } else {
     statusDes = "<font color=\"comment\">已取消</font>"
