@@ -20,6 +20,25 @@ def MySh(cmd,returnStatus) {
 
 
 // 发送审批信息
+def SendApprovalDingDing(AppToken,ApprovalUser,JobName,Info,ApprovalCode = '') {
+  echo "!--------- Send DingDing --------------"
+	MySh("""
+		curl --location --request POST 'https://oapi.dingtalk.com/robot/send?access_token=$AppToken' \
+		--header 'Content-Type: application/json' \
+		--data '{
+      "msgtype": "markdown",
+      "markdown": {
+        "title": "线上发布",
+        "text": "#### 【${ApprovalUser}】发布上线申请,请审批
+         \n > 应用名称: ${JobName} 
+         \n > 构建信息: ${Info} 
+         \n > 随机验证码: ${ApprovalCode} \n"
+      }
+    }'
+	""",true)
+}
+
+// 发送审批信息
 def SendApprovalWxWork(AppToken,ApprovalUser,JobName,Info,ApprovalCode = '') {
   echo "!--------- Send WxWork --------------"
 	MySh("""
